@@ -1,0 +1,18 @@
+---
+
+- name: Add public key for Ajenti Repo
+  apt_key: url=http://repo.ajenti.org/debian/key state=present
+
+- name: Add Ajenti Repo
+  apt_repository: repo='deb http://repo.ajenti.org/debian main main debian' state=present
+
+- name: Install support packages
+  apt: name={{item}} state=installed
+  with_items: support_packages
+
+- name: Install Gevent from pypy
+  shell: "easy_install -U gevent"
+
+- name: Install Ajenti
+  apt: name=ajenti state=present
+  notify: Start Ajenti

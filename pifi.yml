@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+
+  roles:
+    - { role: ap }
+    - { role: ajenti, tags: ajenti }

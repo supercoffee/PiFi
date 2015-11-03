@@ -1,0 +1,11 @@
+---
+
+support_packages:
+  - python-dev
+  - python-greenlet
+  - python-gevent
+  - python-vte
+  - openssl
+  - python-crypto
+  - python-appindicator
+  - python-setuptools

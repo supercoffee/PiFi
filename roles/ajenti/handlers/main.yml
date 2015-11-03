@@ -1,0 +1,4 @@
+---
+
+- name: Start Ajenti
+  service: name=ajenti state=restarted
