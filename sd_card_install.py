@@ -24,6 +24,8 @@ PLATFORM_MAC = 'Darwin'
 DEVICE_PATH_OSX = '/dev/*'
 DEVICE_PATH_LINUX = '/sys/block/*'
 
+SAFE_PROTOCOLS = ['Secure Digital', 'USB']
+
 # Add any other device pattern to read from
 dev_pattern = ['sd.*','mmcblk*', 'disk[\d]$']
 
@@ -54,7 +56,7 @@ def get_block_device_list():
     for device in glob.glob(get_os_block_device_path()):
         for pattern in dev_pattern:
             if re.compile(pattern).match(os.path.basename(device)):
-                block_devices.append(device)
+                block_devices.append(get_block_device_info(device))
                 continue
 
     return block_devices
@@ -76,12 +78,15 @@ def get_block_device_info(device):
         return info
 
 
+def filter_safe_block_devices(devices):
+
+    return [device for device in devices if device['protocol'] in SAFE_PROTOCOLS]
+
 
 def print_block_device_list():
 
-    for device in get_block_device_list():
+    for device in filter_safe_block_devices(get_block_device_list()):
         print(device)
-        print(get_block_device_info(device))
 
 
 if __name__=='__main__':
