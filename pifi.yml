@@ -3,5 +3,5 @@
 - hosts: all
 
   roles:
-    - { role: ap }
+    - { role: ap, tags: wireless }
     - { role: ajenti, tags: ajenti }

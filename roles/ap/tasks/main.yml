@@ -1,13 +1,16 @@
 ---
-
-- name: Install AP packages
-  apt: name=hostapd state=installed
+- include: install_drivers.yml
 
 - name: Copy interfaces file
   template: src=interfaces dest=/etc/network/interfaces
+  notify: Restart Networking
 
 - name: Copy HostAPD config file
   template: src=hostapd.conf.j2 dest=/etc/hostapd/hostapd.conf
+  notify: Restart HostAPD
 
 - name: Enable HostAPD on boot
   lineinfile: dest=/etc/default/hostapd regexp='#DAEMON_CONF=' state=present line='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
+
+- name: Start HostAPD service now
+  service: name=hostapd state=started

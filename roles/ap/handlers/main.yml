@@ -1,0 +1,6 @@
+---
+- name: Restart Networking
+  service: name=networking state=restarted
+
+- name: Restart HostAPD
+  service: name=hostapd state=restarted

@@ -4,6 +4,6 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
-iface wlan1 inet static
+iface wlan0 inet static
     address 10.10.1.1
     netmask 255.255.255.0
