@@ -1,0 +1,7 @@
+---
+
+- name: Install Ip Tables
+  apt: package=iptables state=installed
+
+- name: Install Ip tables persistent
+  apt: package=iptables-persistent state=installed

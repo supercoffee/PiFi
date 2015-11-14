@@ -3,12 +3,6 @@
 - name: Enable IP forwarding
   sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes
 
-- name: Install Ip Tables
-  apt: package=iptables state=installed
-
-- name: Install Ip tables persistent
-  apt: package=iptables-persistent state=installed
-
 - name: Flush IPtables
   command: iptables -F
 
