@@ -1,0 +1,9 @@
+interface={{lan_interface}}
+
+dhcp-range={{lan_interface}},{{dhcp_start_addr}},{{dhcp_end_addr}},2h
+
+dhcp-option=3,{{lan_ip}} # our router
+
+dhcp-option=6,{{lan_ip}} # our DNS Server
+
+dhcp-authoritative # force clients to grab a new IP

@@ -1,0 +1,8 @@
+---
+
+lan_interface: wlan0
+lan_ip: 10.10.1.1
+lan_subnet: 255.255.255.0
+dhcp_start_addr: 10.10.1.100
+dhcp_end_addr: 10.10.1.200
+dhcp_server: 8.8.8.8

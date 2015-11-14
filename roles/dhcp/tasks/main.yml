@@ -1,0 +1,15 @@
+---
+
+- name: Install DNSMasq
+  apt: package=dnsmasq state=installed
+
+- name: Copy DNSMasq configuration
+  template: src=dnsmasq.custom.conf.j2 dest=/etc/dnsmasq.d/dnsmasq.custom.conf
+  notify: Restart DNSMasq
+
+- name: Copy Custom resolv.conf file
+  template: src=resolv.conf.j2 dest=/etc/resolv.conf
+  notify: Restart Lan Interface
+
+- name: Ensure DNSMasq service is running
+  service: name=dnsmasq state=started enabled=yes

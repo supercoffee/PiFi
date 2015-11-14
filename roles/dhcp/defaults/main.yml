@@ -1,0 +1,6 @@
+---
+
+lan_interface: wlan0
+
+dhcp_start_addr: 10.10.1.100
+dhcp_end_addr: 10.10.1.200

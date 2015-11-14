@@ -4,4 +4,8 @@
 
   roles:
     - { role: ap, tags: wireless }
+    - { role: dhcp, tags: dhcp }
     - { role: ajenti, tags: ajenti }
+
+  vars_files:
+    - vars/main.yml

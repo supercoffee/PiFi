@@ -1,0 +1,7 @@
+---
+
+- name: Restart DNSMasq
+  service: name=dnsmasq state=restarted
+
+- name: Restart Lan Interface
+  command: ifdown {{lan_interface}} && ifup {{lan_interface}}
