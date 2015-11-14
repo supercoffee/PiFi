@@ -1,7 +1,17 @@
 ---
 
-#download driver package
-#extract files
-#install gcc and make
-#make
-#make install
+- name: Dowload custom HostAPD
+  get_url: url=https://github.com/jenssegers/RTL8188-hostapd/archive/v1.1.tar.gz dest=/tmp/hostapd.tar.gz
+
+- name: Extract HostAPD source code
+  unarchive: copy=no src=/tmp/hostapd.tar.gz dest=/tmp/hostapd
+
+- name: Install Gcc and Make
+  apt: name={{item}} state=installed
+  with_items: [gcc, make]
+
+- name: Compile HostAPD
+  shell: make
+
+- name: Install HostAPD
+  shell: make install

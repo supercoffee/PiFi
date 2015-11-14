@@ -1,4 +1,3 @@
 ---
-wifi_driver: "rt73_usb"
 wifi_password: "PiIsBetterThanCake"
 wifi_ssid: "PiFi"

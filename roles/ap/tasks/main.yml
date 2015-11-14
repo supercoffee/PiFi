@@ -1,5 +1,11 @@
 ---
+
+- name: Check if HostAPD is installed
+  command: which hostapd
+  register: install_hostapd
+
 - include: install_drivers.yml
+  when: install_hostapd.rc == 1
 
 - name: Copy interfaces file
   template: src=interfaces dest=/etc/network/interfaces
