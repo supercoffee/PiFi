@@ -1,0 +1,16 @@
+---
+
+- name: Enable IP forwarding
+  sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes
+
+- name: Install Ip Tables
+  apt: package=iptables state=installed
+
+- name: NAT
+  command: iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+- name: Accept established connections
+  command: iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+- name: Forward packets from wlan0 to eth0
+  command: iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
