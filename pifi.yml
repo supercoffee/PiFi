@@ -5,7 +5,8 @@
   roles:
     - { role: ap, tags: wireless }
     - { role: dhcp, tags: dhcp }
-    - { role: router, tags: router }
+    - { role: router, tags: [iptables, router] }
+    - { role: firewall, tags: [firewall, iptables]}
     - { role: ajenti, tags: ajenti }
 
   vars_files:

@@ -6,6 +6,9 @@
 - name: Flush IPtables
   command: iptables -F
 
+- name: Flush IPtables
+  command: iptables -t nat -F
+
 - name: NAT
   command: iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
