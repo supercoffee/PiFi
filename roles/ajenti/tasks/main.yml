@@ -1,4 +1,7 @@
 ---
+# References
+# Installing the right dependencies is tricky https://github.com/ajenti/ajenti/issues/815
+# Installing Pip packages https://docs.ansible.com/ansible/pip_module.html
 
 - name: Add public key for Ajenti Repo
   apt_key: url=http://repo.ajenti.org/debian/key state=present
@@ -11,7 +14,13 @@
   with_items: support_packages
 
 - name: Install Gevent from pypy
-  shell: "easy_install -U gevent"
+  pip:
+    name: gevent
+    version: 1.1b4
+    extra_args: '-U'
+
+- name: Install greenlet
+  pip: name=greenlet
 
 - name: Install Ajenti
   apt: name=ajenti state=present

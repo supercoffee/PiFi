@@ -5,6 +5,7 @@ support_packages:
   - python-greenlet
   - python-gevent
   - python-vte
+  - python-pip
   - openssl
   - python-crypto
   - python-appindicator
