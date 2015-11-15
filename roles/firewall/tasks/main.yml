@@ -16,5 +16,11 @@
 - name: Open port for DHCP
   shell: iptables -A INPUT -p udp --dport=67 -i wlan0  -j ACCEPT
 
+- name: Open port for Ajenti Web control Panel
+  shell: iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
+
+- name: Allow responses to locally generated traffic
+  shell: iptables -A INPUT -i eth0 -m conntrack --ctstate=RELATED,ESTABLISHED -j ACCEPT
+
 - name: Append DROP rule to INPUT chain
   shell: iptables  -A INPUT -j DROP
