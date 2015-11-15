@@ -4,18 +4,17 @@
 # https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04
 # https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture
 
-# Allow SSH
-#- iptables: chain=INPUT destination_port=22 jump=ACCEPT
-- shell: iptables -A INPUT -p tcp --dport=22  -j ACCEPT
+- name: Open port for SSH
+  shell: iptables -A INPUT -p tcp --dport=22  -j ACCEPT
 
-# allow input on UDP 53 for DNS
-- shell: iptables -A INPUT -p udp --dport=53 -i wlan0 -j ACCEPT
+- name: Open port for incoming DNS requests from LAN
+  shell: iptables -A INPUT -p udp --dport=53 -i wlan0 -j ACCEPT
 
-# allow DNS replies from outside world
-- shell: iptables -A INPUT -p udp --sport=53 -i eth0 -m conntrack --ctstate=ESTABLISHED -j ACCEPT
+- name: Open port for incoming DNS replies from WAN
+  shell: iptables -A INPUT -p udp --sport=53 -i eth0 -m conntrack --ctstate=ESTABLISHED -j ACCEPT
 
-# DHCP server
-- shell: iptables -A INPUT -p udp --dport=67 -i wlan0  -j ACCEPT
+- name: Open port for DHCP
+  shell: iptables -A INPUT -p udp --dport=67 -i wlan0  -j ACCEPT
 
 - name: Append DROP rule to INPUT chain
   shell: iptables  -A INPUT -j DROP
