@@ -24,3 +24,6 @@
 
 - name: Append DROP rule to INPUT chain
   shell: iptables  -A INPUT -j DROP
+
+- name: Save iptables rules
+  shell: 'iptables-save > /etc/iptables/rules.v4'
