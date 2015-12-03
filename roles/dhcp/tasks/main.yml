@@ -7,6 +7,13 @@
   template: src=dnsmasq.custom.conf.j2 dest=/etc/dnsmasq.d/dnsmasq.custom.conf
   notify: Restart DNSMasq
 
+- name: Enable custom config directory
+  lineinfile:
+    dest: /etc/dnsmasq.conf
+    line: "conf-file=/etc/dnsmasq.d/dnsmasq.custom.conf"
+    regexp: "conf-file.+"
+  notify: Restart DNSMasq
+
 - name: Copy Custom resolv.conf file
   template: src=resolv.conf.j2 dest=/etc/resolv.conf
   notify: Restart Lan Interface
