@@ -1,3 +1,5 @@
 ---
 wifi_password: "PiIsBetterThanCake"
 wifi_ssid: "PiFi"
+
+host_apd_extract_path: /tmp/hostapd

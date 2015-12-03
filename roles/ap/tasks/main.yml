@@ -2,6 +2,7 @@
 
 - name: Check if HostAPD is installed
   command: which hostapd
+  ignore_errors: yes
   register: install_hostapd
 
 - include: install_drivers.yml
@@ -14,9 +15,6 @@
 - name: Copy HostAPD config file
   template: src=hostapd.conf.j2 dest=/etc/hostapd/hostapd.conf
   notify: Restart HostAPD
-
-- name: Enable HostAPD on boot
-  lineinfile: dest=/etc/default/hostapd regexp='#DAEMON_CONF=' state=present line='DAEMON_CONF="/etc/hostapd/hostapd.conf"'
 
 - name: Start HostAPD service now
   service: name=hostapd state=started enabled=yes

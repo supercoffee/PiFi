@@ -3,15 +3,28 @@
 - name: Dowload custom HostAPD
   get_url: url=https://github.com/jenssegers/RTL8188-hostapd/archive/v1.1.tar.gz dest=/tmp/hostapd.tar.gz
 
+- name: Create directory to extract HostAPD
+  file: path="{{host_apd_extract_path}}" state=directory
+
 - name: Extract HostAPD source code
-  unarchive: copy=no src=/tmp/hostapd.tar.gz dest=/tmp/hostapd
+  unarchive: copy=no src=/tmp/hostapd.tar.gz dest="{{host_apd_extract_path}}"
 
 - name: Install Gcc and Make
   apt: name={{item}} state=installed
   with_items: [gcc, make]
 
+- name: Clean build directory
+  command: "make clean"
+  args:
+    chdir: "{{host_apd_extract_path}}/RTL8188-hostapd-1.1/hostapd"
+
 - name: Compile HostAPD
-  shell: make
+  command: "make"
+  args:
+    chdir: "{{host_apd_extract_path}}/RTL8188-hostapd-1.1/hostapd"
 
 - name: Install HostAPD
-  shell: make install
+  shell: "make install"
+  args:
+    chdir: "{{host_apd_extract_path}}/RTL8188-hostapd-1.1/hostapd"
+
