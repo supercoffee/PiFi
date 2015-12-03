@@ -4,6 +4,8 @@ iface lo inet loopback
 auto eth0
 iface eth0 inet dhcp
 
+allow-hotplug wlan0
+
 iface {{lan_interface}} inet static
     address {{lan_ip}}
     netmask {{lan_subnet}}
