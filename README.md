@@ -1,6 +1,8 @@
+# PiFi
 
+Turn your Raspberry Pi into a wireless access point. 
 
-#Setup
+## Setup
 
 ###Flash the raspbian minimal image
 
